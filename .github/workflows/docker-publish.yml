@@ -9,9 +9,9 @@ jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
         run: |
-           docker build ./Dockerfile -t mendelor/githubaction:v1 .
+           docker build . --file Dockerfile -t githubaction:$(date +%s)
