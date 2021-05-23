@@ -13,5 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
-        run: |
-           docker build . --file Dockerfile -t githubaction:$(date +%s)
+        run: docker build . --file Dockerfile --tag githubaction:test
