@@ -5,11 +5,15 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
+  pull_request:
+    # Publish `master` as Docker `latest` image.
+    branches:
+      - master
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
   test:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v2
       - name: Run tests
