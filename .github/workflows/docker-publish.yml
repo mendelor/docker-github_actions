@@ -5,10 +5,6 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - master
-  pull_request:
-    # Publish `master` as Docker `latest` image.
-    branches:
-      - master
 jobs:
   # Run tests.
   # See also https://docs.docker.com/docker-hub/builds/automated-testing/
