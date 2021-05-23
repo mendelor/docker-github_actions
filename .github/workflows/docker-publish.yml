@@ -15,7 +15,7 @@ jobs:
       image: node
 
   cd:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: ci
 
     steps:
