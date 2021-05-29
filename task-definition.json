@@ -29,7 +29,7 @@
             "memoryReservation": null,
             "volumesFrom": [],
             "stopTimeout": null,
-            "image": "${{ secrets.ACCOUNT }}.dkr.ecr.us-east-2.amazonaws.com/hello-world:sample-app",
+            "image": "${{ secrets.ACCOUNT }}.dkr.ecr.us-east-2.amazonaws.com/hello-world:phtml",
             "startTimeout": null,
             "firelensConfiguration": null,
             "dependsOn": null,
