@@ -1,16 +1,16 @@
 on:
-      push:
-        branches:
-          - master
+  push:
+    branches:
+      - master
 
-    name: Deploy to Amazon ECS
+name: Deploy to Amazon ECS
 
-    jobs:
-      deploy:
-        name: Deploy
-        runs-on: ubuntu-latest
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
 
-    steps:
+  steps:
     - name: Checkout
       uses: actions/checkout@v1
 
