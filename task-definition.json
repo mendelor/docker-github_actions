@@ -1,6 +1,6 @@
 {
     "ipcMode": null,
-    "executionRoleArn": null,
+    "executionRoleArn": "arn:aws:iam::317413990831:role/ecsTaskExecutionRole",
     "containerDefinitions": [
         {
             "dnsSearchDomains": null,
@@ -29,7 +29,7 @@
             "memoryReservation": null,
             "volumesFrom": [],
             "stopTimeout": null,
-            "image": "${{ secrets.ACCOUNT }}.dkr.ecr.us-east-2.amazonaws.com/hello-world:phtml",
+            "image": "317413990831.dkr.ecr.us-east-2.amazonaws.com/hello-world:latest",
             "startTimeout": null,
             "firelensConfiguration": null,
             "dependsOn": null,
@@ -46,18 +46,18 @@
             "dockerLabels": null,
             "systemControls": null,
             "privileged": null,
-            "name": "phtml"
+            "name": "learn-container"
         }
     ],
-    "memory": "256",
-    "taskRoleArn": null,
-    "family": "phtml",
+    "memory": "512",
+    "taskRoleArn": "arn:aws:iam::317413990831:role/ecsTaskExecutionRole",
+    "family": "learn-task",
     "pidMode": null,
     "requiresCompatibilities": [
         "EC2"
     ],
-    "networkMode": null,
-    "cpu": "512",
+    "networkMode": "bridge",
+    "cpu": "256",
     "inferenceAccelerators": [],
     "proxyConfiguration": null,
     "volumes": [],
