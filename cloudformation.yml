@@ -48,13 +48,13 @@ Resources:
                           Condition:
                               ArnEquals:
                                   ecs:cluster:
-                                      - !Sub "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                          Resource: !Sub "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
+                                      -  "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
+                          Resource: "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
                         - Action:
                               - "ecs:DescribeTasks"
                           Effect: Allow
                           Condition:
                               ArnEquals:
                                   ecs:cluster:
-                                      - !Sub "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                          Resource: !Sub "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
+                                      - "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
+                          Resource:  "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
