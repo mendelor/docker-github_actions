@@ -12,7 +12,7 @@ Resources:
           Value: proje1
       UserData:
         Fn::Base64:                                # YAML makes userdata much cleaner
-          !Sub |
+        #  !Sub |
               #!/bin/bash -ex
               yum install -y httpd;
               echo "<html>I love YAML CloudFormation!!</html>" > /var/www/html/index.html;
