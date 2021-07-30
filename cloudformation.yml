@@ -1,60 +1,27 @@
 AWSTemplateFormatVersion: '2010-09-09'
-
 Resources:
-  TaskRole:
-      Type: AWS::IAM::Role
-      Properties:
-          RoleName: !Sub ${AWS::StackName}-task-role
-          Path: /
-          AssumeRolePolicyDocument:
-              Version: 2012-10-17
-              Statement:
-                  - Effect: Allow
-                    Principal:
-                        Service:
-                            - ecs-tasks.amazonaws.com
-                    Action: sts:AssumeRole
-          Policies:
-              - PolicyName: !Sub ecs-${AWS::StackName}
-                PolicyDocument:
-                    Version: "2012-10-17"
-                    Statement:
-                        - Action:
-                              - "ecs:RegisterTaskDefinition"
-                              - "ecs:ListClusters"
-                              - "ecs:DescribeContainerInstances"
-                              - "ecs:ListTaskDefinitions"
-                              - "ecs:DescribeTaskDefinition"
-                              - "ecs:DeregisterTaskDefinition"
-                          Effect: Allow
-                          Resource: "*"
-                        - Action:
-                              - "ecs:ListContainerInstances"
-                              - "ecs:DescribeClusters"
-                          Effect: Allow
-                          Resource:
-                              - !Sub "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                        - Action:
-                              - "ecs:RunTask"
-                          Effect: Allow
-                          Condition:
-                              ArnEquals:
-                                  ecs:cluster:
-                                      - !Sub "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                          Resource: !Sub "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task-definition/*"
-                        - Action:
-                              - "ecs:StopTask"
-                          Effect: Allow
-                          Condition:
-                              ArnEquals:
-                                  ecs:cluster:
-                                      -  "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                          Resource: "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
-                        - Action:
-                              - "ecs:DescribeTasks"
-                          Effect: Allow
-                          Condition:
-                              ArnEquals:
-                                  ecs:cluster:
-                                      - "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:cluster/myClus"
-                          Resource:  "arn:aws:ecs:*:*:task/*" # "arn:aws:ecs:${AWS::Region}:${AWS::AccountId}:task/*"
+  Ec2Instance:
+    Type: AWS::EC2::Instance             #1
+    #DeletionPolicy: Retain       #Stack deletion don't delete the EC2
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-058fea0dcd5b42f9c # Amazon Linux AMI in N.Virginia
+      KeyName: newkipi
+      Tags:
+        - Key: Name
+          Value: proje1
+      UserData:
+        Fn::Base64:                                # YAML makes userdata much cleaner
+          !Sub |
+              #!/bin/bash -ex
+              yum install -y httpd;
+              echo "<html>I love YAML CloudFormation!!</html>" > /var/www/html/index.html;
+              cd /var/www/html;
+              chmod 755 index.html;
+              service httpd start;
+              chkconfig httpd on;
+
+  S3bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: proje1
